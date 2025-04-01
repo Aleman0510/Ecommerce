@@ -1,0 +1,98 @@
+/* static/css/map.css */
+:root {
+    --primary-color: #2c3e50;     /* Color principal (azul oscuro) */
+    --secondary-color: #e74c3c;   /* Color de acento (rojo) */
+    --background-color: #f8f9fa;  /* Color de fondo */
+    --text-color: #34495e;        /* Color de texto principal */
+}
+
+/* Estilos generales */
+.map-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Estilos del formulario */
+.map-form {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.map-form input[type="text"] {
+    flex: 1 1 200px;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.map-form input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+}
+
+.map-form input[type="submit"] {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.map-form input[type="submit"]:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos del mapa */
+#map {
+    height: 60vh;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .map-form {
+        flex-direction: column;
+    }
+    
+    .map-form input[type="text"] {
+        width: 100%;
+        flex: none;
+    }
+    
+    #map {
+        height: 50vh;
+    }
+}
+
+/* Mejoras de tipografía */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin: 2rem 0;
+    font-size: 2.5rem;
+}
