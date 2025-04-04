@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ubicación Específica</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+            border: 2px solid #4361ee;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #4361ee;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nuestra Ubicación Principal</h1>
+    <div id="map"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.3.0/dist/ol.js"></script>
+    <script>
+        // 1. Coordenadas específicas (longitud, latitud)
+        const ubicacion = [-99.133209, 19.432608];  // Zócalo CDMX
+        
+        // 2. Configuración del mapa
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()  // Capa base de OpenStreetMap
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat(ubicacion),
+                zoom: 15  // Más zoom para mayor detalle
+            })
+        });
+
+        // 3. Marcador con estilo personalizado
+        new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [
+                    new ol.Feature({
+                        geometry: new ol.geom.Point(
+                            ol.proj.fromLonLat(ubicacion)
+                        ),
+                        name: "Tienda Principal"
+                    })
+                ]
+            }),
+            style: new ol.style.Style({
+                image: new ol.style.Icon({
+                    src: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                    scale: 1.5,
+                    anchor: [0.5, 1]  // Punto de anclaje (centro-abajo)
+                }),
+                text: new ol.style.Text({
+                    text: '¡Estamos aquí!',
+                    offsetY: -25,
+                    font: 'bold 14px Arial',
+                    fill: new ol.style.Fill({ color: '#d6336c' })
+                })
+            })
+        }).setMap(map);
+    </script>
+</body>
+</html>
