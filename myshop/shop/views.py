@@ -61,3 +61,43 @@ def mapa(request):
         'lon': lon
     }
     return render(request, 'map.html', context)
+
+
+#INICIO DE SESION Y REGISTRO
+# shop/views.py
+# ... (tus imports existentes)
+from django.contrib.auth.decorators import login_required
+from .forms import RegisterForm  # Asegúrate de importar tus formularios
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm  # ¡Importación clave!
+from .forms import RegisterForm  # Asegúrate de importar tu RegisterForm
+
+# ... (tus otras vistas existentes)
+
+# Vistas de autenticación
+def register_view(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('shop:product_list')  # Redirige a la lista de productos
+    else:
+        form = RegisterForm()
+    return render(request, 'shop/register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('shop:product_list')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'shop/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('shop:product_list')
